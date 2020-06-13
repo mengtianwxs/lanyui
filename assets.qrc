@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>lanyui/images/hua.png</file>
+        <file>lanyui/images/arrow_down.png</file>
+        <file>lanyui/images/arrow_up.png</file>
+        <file>lanyui/images/arrowhuise.png</file>
+        <file>lanyui/images/xinfeng.png</file>
+        <file>lanyui/images/openfi.png</file>
+        <file>lanyui/images/yi.png</file>
+        <file>lanyui/images/yix.png</file>
+        <file>lanyui/images/yit.png</file>
+        <file>lanyui/images/fi1.png</file>
+        <file>lanyui/images/fi2.png</file>
+        <file>lanyui/images/quickmenu1.png</file>
+        <file>lanyui/images/td.png</file>
+        <file>lanyui/images/tdh.png</file>
+    </qresource>
+</RCC>
