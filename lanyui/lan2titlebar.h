@@ -6,29 +6,34 @@
 #include <QMouseEvent>
 #include <QObject>
 #include <QPushButton>
-#include <QWidget>
+#include <QFrame>
 #include <QHBoxLayout>
 #include <QMainWindow>
+#include <QLineEdit>
+#include <QMenu>
+#include <QSizePolicy>
 
 #include "lan2global.h"
 
 QTB_LANYUI
-class Lan2TitleBar : public QWidget
+class Lan2TitleBar : public QFrame
 {
     Q_OBJECT
 public:
     explicit Lan2TitleBar(QWidget *parent = nullptr);
 private:
-    bool isLeftPressed;
+    bool t_isLeftPressed=false;
     QPoint start_pos;
+
+    QWidget* mainWidget;
 
     QLabel* lal_title;
     QLabel* lal_icon;
     QPushButton* btn_min;
     QPushButton* btn_close;
     QPushButton* btn_max;
+    int t_d=3;
 public:
-    QHBoxLayout* hbox;
     void addQuickMenu(Lan2QuickMenu* menu);
     void setMinBtnText(QString text);
     void setMaxBtnText(QString text);
@@ -36,20 +41,19 @@ public:
     void setWinTitle(QString text);
     void setwinIcon(QString text);
     void addWidget(int index,QWidget* wid);
+    QWidget* getWidgetByName(QString na);
+
+private:
+    QHBoxLayout* hbox;
+
 
 protected:
-    void mousePressEvent(QMouseEvent* event);
-    void mouseMoveEvent(QMouseEvent* event);
-    void mouseReleaseEvent(QMouseEvent* event);
-    void mouseDoubleClickEvent(QMouseEvent *event);
     void contextMenuEvent(QContextMenuEvent* event);
-   // bool eventFilter(QObject* obj,QEvent* event);
-
-
+//    void mousePressEvent(QMouseEvent* event);
 
 protected slots:
     void onClick();
-    void onRightMenuClick();
+//    void onrs(QPoint);
 
 };
 QTE_LANYUI

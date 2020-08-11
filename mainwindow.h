@@ -4,12 +4,25 @@
 
 
 #include <QMainWindow>
+#include <QToolBar>
+#include<QMenuBar>
+#include<QMouseEvent>
+#include<QDesktopWidget>
+#include <QVBoxLayout>
 
+#include <lanyui/framelesswindow.h>
+#include <lanyui/lan2contexttab.h>
+#include <lanyui/lan2titlebar.h>
+//#include <lanyui/lan2demowindow.h>
+#include<lanyui/styles/lss2assets.h>
+#include <lanyui/lan2quickmenu.h>
+
+QT_USE_LANYUI
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+class MainWindow : public CFramelessWindow
 {
     Q_OBJECT
 
@@ -19,12 +32,36 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QVBoxLayout* vbox;
 
-signals:
-    void sigresize();
+public:
+
+    int getDesktopWidth();
+    int getDesktopHeight();
+
+
+    void initUserData();//use data
+
+
+private:
+
+    void hideMainToolBarAndMenuBar(QMainWindow* mw);
+    void hideMainStatusBar(QMainWindow* mw);
+
+    Lan2TitleBar* tb;
+    QLabel* lal;
 
 protected:
-    virtual void resizeEvent(QResizeEvent* event);
+    void mousePressEvent(QMouseEvent*event);
+
+public slots:
+//    void slot_r(QPoint);
+
+
+
+
+
+
 
 
 

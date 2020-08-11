@@ -11,6 +11,7 @@
 #include <QFrame>
 #include <QLabel>
 #include "lan2global.h"
+#include "lan2labelgroupmenu.h"
 
 QTB_LANYUI
 class Lan2ToolGroup : public QHBoxLayout
@@ -29,7 +30,8 @@ public:
     //@5
     void addUPAndDownDoubleToolButton(QToolButton* tb_icon=NULL,QString asset="",QToolButton* tb_text=NULL,QString text="",QMenu* menu=NULL);
     //@6
-    void addTitleMenu(QLabel* title,QVector<QAction*> vec);
+    void addTitleMenu(QToolButton* tb,Lan2LabelGroupMenu* li_labelmenu);
+
     void endGroup();
 public:
     ////////////group1
@@ -41,6 +43,9 @@ public:
     QVector<QWidget*> vec_wids;
      ////////////group3
     QVector<QLayout*> vec_layouts;
+
+    QVector<QToolButton*> vec_titletb;
+    QVector<Lan2LabelGroupMenu*> vec_labelgroup;
 
     QAction* act_tbtext;
     QFrame* wid;

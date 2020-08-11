@@ -149,6 +149,13 @@ void Lan2ToolGroup::addUPAndDownDoubleToolButton(QToolButton *tb_icon, QString a
 
 }
 
+void Lan2ToolGroup::addTitleMenu(QToolButton *tb, Lan2LabelGroupMenu *li_labelmenu)
+{
+   vec_titletb.append(tb);
+  vec_labelgroup.append(li_labelmenu);
+
+}
+
 
 
 
@@ -210,7 +217,18 @@ void Lan2ToolGroup::endGroup()
         }
     }
 
-    ////////////////////////////////////////////////////add grid menu toolbutton or not
+    ////////////////////////////////////////////////////add label
+   int menucout=vec_labelgroup.count();
+   int labelcout=vec_titletb.count();
+   if(menucout>0 and labelcout>0){
+       for(int i=0;i<menucout;i++){
+vec_titletb[i]->setPopupMode(QToolButton::InstantPopup);
+          vec_titletb[i]->setMenu(vec_labelgroup[i]);
+          this->addWidget(vec_titletb[i]);
+
+       }
+
+   }
 
 
 /////////////////////////////////////////////////////////////////////////add v line

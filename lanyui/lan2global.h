@@ -1,9 +1,9 @@
 #ifndef LAN2GLOBAL_H
 #define LAN2GLOBAL_H
-
+#include<QDebug>
 #define QTB_LANYUI namespace LANYUI {
 #define QTE_LANYUI }
-#define QTUSE_LANYUI using namespace LANYUI;
+#define QT_USE_LANYUI using namespace LANYUI;
 
 #if defined (LANYUI)
 #undef LANYUI

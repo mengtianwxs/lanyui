@@ -14,5 +14,9 @@
         <file>lanyui/images/quickmenu1.png</file>
         <file>lanyui/images/td.png</file>
         <file>lanyui/images/tdh.png</file>
+        <file>lanyui/images/close.png</file>
+        <file>lanyui/images/m_max.png</file>
+        <file>lanyui/images/m_min.png</file>
+        <file>lanyui/images/min.png</file>
     </qresource>
 </RCC>

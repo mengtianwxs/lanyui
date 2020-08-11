@@ -11,4 +11,12 @@ const QString PATH_IMG_YI="://lanyui/images/yi.png";
 const QString PATH_IMG_OPENFILE="://lanyui/images/openfi.png";
 const QString PATH_IMG_OPENFILE1="://lanyui/images/fi1.png";
 const QString PATH_IMG_OPENFILE2="://lanyui/images/fi2.png";
+const QString PATH_IMG_MNORMAL="://lanyui/images/m_max.png";
+const QString PATH_IMG_MMAX="://lanyui/images/m_min.png";
+const QString PATH_IMG_MMIN="://lanyui/images/min.png";
+const QString PATH_IMG_MCLOSE="://lanyui/images/close.png";
+
+
+
+
 #endif // LSS2ASSETS_H

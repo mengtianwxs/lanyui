@@ -1,19 +1,19 @@
 #include "lan2titlebar.h"
 
-#include <QLineEdit>
-#include <QMenu>
-#include <QSizePolicy>
 QTB_LANYUI
-Lan2TitleBar::Lan2TitleBar(QWidget *parent) : QWidget(parent)
+Lan2TitleBar::Lan2TitleBar(QWidget *parent)
+    : QFrame(parent)
 {
 
-
+    setStyleSheet(StyleSheet_WidCommonBG);
+    setFixedHeight(C_TitleBarHeight);
 
     lal_icon=new QLabel();
     lal_icon->setFixedSize(C_TitleBarWidWidth,C_TitleBarWidHeight);
 
 
     lal_title=new QLabel();
+    lal_title->setObjectName("title");
     lal_title->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
     lal_title->setFixedHeight(C_TitleBarWidHeight);
     lal_title->setScaledContents(true);
@@ -25,7 +25,6 @@ Lan2TitleBar::Lan2TitleBar(QWidget *parent) : QWidget(parent)
     btn_max->setText("「」");
     btn_min->setText("-");
     btn_close->setText("x");
-//    btn_close->setFlat(false);
 
     btn_min->setStyleSheet(StyleSheet_DefaultTitleBarPushButtonBG);
     btn_max->setStyleSheet(StyleSheet_DefaultTitleBarPushButtonBG);
@@ -36,40 +35,49 @@ Lan2TitleBar::Lan2TitleBar(QWidget *parent) : QWidget(parent)
     btn_close->setFixedSize(C_TitleBarsPBWidth,C_TitleBarsPBHeight);
 
 
-    QWidget* mainWidget=new QWidget();
-    QHBoxLayout* mainLayout=new QHBoxLayout(this);
-    mainLayout->addWidget(mainWidget);
-    mainWidget->setStyleSheet(StyleSheet_WidCommonBG);
-    mainWidget->setFixedHeight(C_TitleBarHeight);
-    mainLayout->setMargin(0);
-    mainLayout->setContentsMargins(0,0,0,0);
-    mainLayout->setSpacing(0);
+
+    QFont font("Microsoft YaHei",14,2);
+    lal_title->setFont(font);
+
+    QLineEdit* le=new QLineEdit();
+    le->setStyleSheet("QLineEdit{background:#ffffff;}QLineEdit::hover{border:none}");
 
 
-//    QFont font("Microsoft YaHei",14,2);
-//    lal_title->setFont(font);
+//    QLabel* lalnullleft=new QLabel();
+//    lalnullleft->setFixedHeight(C_TitleBarHeight);
+//    QLabel* lalnullright=new QLabel();
+//    lalnullright->setFixedHeight(C_TitleBarHeight);
+//    lalnullleft->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
 
-//    QLineEdit* le=new QLineEdit();
-//    le->setStyleSheet("QLineEdit{background:#ffffff;}QLineEdit::hover{border:none}");
+//    lalnullleft->setAutoFillBackground(false);
+//    lalnullleft->setAttribute(Qt::WA_TransparentForMouseEvents,true);
 
     hbox=new QHBoxLayout();
     hbox->addWidget(lal_icon);
     hbox->addStretch(1);
+//    hbox->addWidget(lalnullleft,1);
 
     hbox->addWidget(lal_title);
     hbox->addStretch(1);
+//    hbox->addWidget(lalnullright,1);
     hbox->addWidget(btn_min);
     hbox->addWidget(btn_max);
     hbox->addWidget(btn_close);
     hbox->setSpacing(0);
     hbox->setContentsMargins(0,0,0,0);
     hbox->setMargin(0);
-    mainWidget->setLayout(hbox);
+
+    this->setLayout(hbox);
+
 
     connect(btn_min,SIGNAL(clicked()),this,SLOT(onClick()));
     connect(btn_max,SIGNAL(clicked()),this,SLOT(onClick()));
     connect(btn_close,SIGNAL(clicked()),this,SLOT(onClick()));
-    this->setContextMenuPolicy(Qt::DefaultContextMenu);
+
+//    this->setAttribute(Qt::WA_TransparentForMouseEvents,true);
+
+
+
 
 }
 
@@ -112,45 +120,13 @@ void Lan2TitleBar::addWidget(int index, QWidget *wid)
     hbox->insertWidget(index,wid);
 }
 
-void Lan2TitleBar::mousePressEvent(QMouseEvent *event)
+QWidget *Lan2TitleBar::getWidgetByName(QString na)
 {
-    if(event->button()==Qt::LeftButton){
-        isLeftPressed=true;
-        start_pos=event->globalPos();
-    }
+    return findChild<QWidget*>(na);
 }
 
-void Lan2TitleBar::mouseMoveEvent(QMouseEvent *event)
-{
-    if(isLeftPressed){
-//        qDebug()<<parentWidget()->metaObject()->className()<<"title"<<parentWidget()->parentWidget()->metaObject()->className();
-        parentWidget()->parentWidget()->move(parentWidget()->parentWidget()->geometry().topLeft()+event->globalPos()-start_pos);
-
-        start_pos=event->globalPos();
 
 
-    }
-}
-
-void Lan2TitleBar::mouseReleaseEvent(QMouseEvent *event)
-{
-    if(event->button()==Qt::LeftButton){
-        isLeftPressed=false;
-    }
-}
-
-void Lan2TitleBar::mouseDoubleClickEvent(QMouseEvent *event)
-{
-        QWidget* mainwid=parentWidget()->parentWidget();
-        if(mainwid->windowState()==Qt::WindowNoState){
-            mainwid->showMaximized();
-
-        }else if(mainwid->windowState()==Qt::WindowMaximized){
-
-            mainwid->showNormal();
-        }
-
-}
 
 void Lan2TitleBar::contextMenuEvent(QContextMenuEvent *event)
 {
@@ -167,40 +143,12 @@ void Lan2TitleBar::contextMenuEvent(QContextMenuEvent *event)
   connect(ac2,SIGNAL(triggered()),this,SLOT(onRightMenuClick()));
   connect(ac3,SIGNAL(triggered()),this,SLOT(onRightMenuClick()));
   menu->exec(QCursor::pos());//事件注册之后再声明此语句，要不然无效qaction
-  event->accept();
-
-}
-/*
-bool Lan2TitleBar::eventFilter(QObject *obj, QEvent *event)
-{
-    QWidget* pw=qobject_cast<QWidget*>(obj);
-    switch (event->type()) {
-    case QEvent::WindowTitleChange:
-        if(pw){
-
-            lal_title->setText(pw->windowTitle());
-            return true;
-        }
-
-        break;
-
-    case QEvent::WindowIconChange:
-        if(pw){
-            QIcon icon=pw->windowIcon();
-            lal_icon->setPixmap(icon.pixmap(lal_icon->size()));
-            return true;
-
-
-        }
-
-    }
-
-    return QWidget::eventFilter(obj,event);
-
+  delete menu;
+  event->ignore();
 
 
 }
-*/
+
 void Lan2TitleBar::onClick()
 {
     QWidget* mainwid=this->parentWidget()->parentWidget();
@@ -231,19 +179,5 @@ void Lan2TitleBar::onClick()
 
 }
 
-void Lan2TitleBar::onRightMenuClick()
-{
 
-    QWidget* mainwid=this->parentWidget()->parentWidget();
-    QAction* ac=qobject_cast<QAction*>(sender());
-    if(ac->objectName()=="ac_min"){
-        mainwid->showMinimized();
-    }
-    if(ac->objectName()=="ac_max"){
-        mainwid->showMaximized();
-    }
-    if(ac->objectName()=="ac_close"){
-        mainwid->close();
-    }
-}
 QTE_LANYUI
