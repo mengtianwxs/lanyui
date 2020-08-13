@@ -1,6 +1,6 @@
 #ifndef LAN2ENDSHOWORHIDETAB_H
 #define LAN2ENDSHOWORHIDETAB_H
-#include "lanyui/styles/lss2rtab.h"
+#include "lss2rtab.h"
 #include<QObject>
 #include <QAction>
 #include <QObject>

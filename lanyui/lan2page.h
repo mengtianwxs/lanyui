@@ -20,7 +20,8 @@ public:
     Lan2Page(QString objectname,QWidget* parent=NULL);
 public:
     void addDemo(QString txt);
-    void addGroupTool(Lan2ToolGroup* gt);
+    void addToolGroup(Lan2ToolGroup* gt);
+    void addSpace(int space=0);
     void addEndSpace();
 
 

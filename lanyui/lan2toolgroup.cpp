@@ -6,14 +6,14 @@ QTB_LANYUI
 Lan2ToolGroup::Lan2ToolGroup()
 {
     this->setSpacing(6);
-    this->setContentsMargins(0,0,0,0);
-    this->setMargin(0);
+    this->setContentsMargins(10,4,10,4);
+//    this->setMargin(10);
 }
 
 void Lan2ToolGroup::addToolButton(QToolButton *tb,int width,int height)
 {
     if(width==0){
-//        tb->setFixedWidth(C_GroupToolButtonDefWidth);
+        tb->setFixedWidth(C_GroupToolButtonDefWidth);
     }else{
 
         tb->setFixedWidth(width);
@@ -237,6 +237,8 @@ vec_titletb[i]->setPopupMode(QToolButton::InstantPopup);
      this->addWidget(vline);
       isOnlyText=false;
 
+      this->addStretch();
+
 }
 
 QToolButton *Lan2ToolGroup::getTBByName(QString name)
@@ -246,7 +248,7 @@ QToolButton *Lan2ToolGroup::getTBByName(QString name)
 
 void Lan2ToolGroup::ontbtextaction()
 {
-qDebug()<<"clicked tb";
+//qDebug()<<"clicked tb";
 //  QToolButton* tb_icon=getTBByName("tbicon");
 //  QToolButton* tb_text=getTBByName("tbtext");
 //  tb_icon->setStyleSheet(LSS_TBUPDOWN_CLICKED);

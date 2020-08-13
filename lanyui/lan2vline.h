@@ -3,7 +3,7 @@
 
 #include <QFrame>
 #include <QObject>
-#include"lanyui/styles/lss2vline.h"
+#include"lss2vline.h"
 #include "lan2global.h"
 QTB_LANYUI
 

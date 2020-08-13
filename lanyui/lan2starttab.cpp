@@ -3,27 +3,31 @@
 QTB_LANYUI
 
 
-Lan2StartTab::Lan2StartTab(QString objecetname, QWidget *parent):QToolButton(parent)
+Lan2StartTab::Lan2StartTab(QString objectname,QWidget* parent,int width,int height,QString bgcolor):QToolButton(parent)
 
 {
 
-    this->setFixedSize(C_TabStartWidth,C_TabStartHeight);
-    this->setStyleSheet(StyleSheet_DefaultStartTabBG);
+    this->setFixedSize(width,height);
+    this->setStyleSheet("QToolButton{padding-top:-1px;background:"+bgcolor+";color:#ffffff;border:none;}QToolButton:hover{background:#00a06e;}");
     def_action=new QAction();
     this->setDefaultAction(def_action);
     connect(def_action,SIGNAL(triggered()),this,SLOT(method_starttab()));
-
-
-    this->setObjectName(objecetname);
-    if(this->text().isEmpty()){
-          this->setText(objecetname);
+    this->setToolButtonStyle(Qt::ToolButtonTextOnly);
+    if(objectname!=""){
+      this->setObjectName(objectname);
     }
+
+
 
 }
 
+
 void Lan2StartTab::method_starttab()
 {
-    emit sig_starttab(this->objectName());
+    if(objectName()!=""){
+        emit sig_starttab(this->objectName());
+
+    }
 }
 
 

@@ -6,8 +6,8 @@
 #include <QObject>
 #include <QAction>
 #include <QToolButton>
-#include <lanyui/styles/lss2base.h>
-#include "lanyui/styles/lss2gridmenu.h"
+#include "lss2base.h"
+#include "lss2gridmenu.h"
 #include "lan2global.h"
 
 QTB_LANYUI

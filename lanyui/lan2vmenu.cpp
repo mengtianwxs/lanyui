@@ -1,5 +1,5 @@
 #include "lan2vmenu.h"
-
+QTB_LANYUI
 Lan2vmenu::Lan2vmenu(QWidget *parent) : QFrame (parent)
 {
 vbox=new QVBoxLayout();
@@ -15,3 +15,4 @@ this->setFixedWidth(100);
 this->setStyleSheet("background:#ffeecc");
 
 }
+QTE_LANYUI

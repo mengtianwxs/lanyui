@@ -1,7 +1,7 @@
 #ifndef LAN2QUICKMENU_H
 #define LAN2QUICKMENU_H
 
-#include "styles/lss2quickmenu.h"
+#include "lss2quickmenu.h"
 #include <QFrame>
 #include <QHBoxLayout>
 #include <QMenuBar>

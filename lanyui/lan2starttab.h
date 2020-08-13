@@ -1,6 +1,6 @@
 #ifndef LAN2LTAB_H
 #define LAN2LTAB_H
-#include "lanyui/styles/lss2starttab.h"
+#include "lss2starttab.h"
 #include <QAction>
 #include <QObject>
 #include <QToolButton>
@@ -10,14 +10,15 @@
 
 QTB_LANYUI
 
-class Lan2StartTab : public QToolButton
+class Lan2StartTab : public QToolButton//只允许显示文字
 {
     Q_OBJECT
 public:
-    Lan2StartTab(QString objecetname,QWidget* parent=Q_NULLPTR);
+    Lan2StartTab(QString objectname="",QWidget* parent=Q_NULLPTR,int width=60,int height=35,QString bgcolor="#14af75");
 
 public:
     QAction* def_action;
+
 
 signals:
    void sig_starttab(QString name);

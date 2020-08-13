@@ -1,7 +1,7 @@
 #ifndef LAN2ContextTab_H
 #define LAN2ContextTab_H
-#include "lanyui/styles/lss2assets.h"
-#include "lanyui/styles/lss2contexttab.h"
+#include "lss2assets.h"
+#include "lss2contexttab.h"
 #include "lan2endshoworhidetab.h"
 
 
@@ -25,7 +25,7 @@ public:
         SHOW,
         HIDE
     };
-    explicit Lan2ContextTab(QWidget *parent = nullptr);
+    explicit Lan2ContextTab(int height=110,int tabheight=35,QWidget *parent = nullptr);
     void bindMainTabAndPage(Lan2Tab* tb,Lan2Page* page);
     void addRightTab(Lan2RTab* rtb);
     void addEndShowOrHideTab(QString path1,QString path2);
@@ -46,10 +46,10 @@ public:
     void deleteAllPage();
 
     void showPage();
-    void init(QString name);
-    void initStartTab(QString name);
+    void inittab(QString tabobjectname);//初始化首先显示哪个Tab项
+    void initStartTab();
 
-    void addStartAndInitTab(Lan2StartTab* ltb,QString name);
+    void addStartAndInitTab(Lan2StartTab* ltb);
     void setEndTabState(State state);
 //    Stage get
 
@@ -76,6 +76,10 @@ private:
     QString endpath2="";
     Lan2EndShowOrHideTab* endtb;
     State lanstate;
+    Lan2StartTab* lanstarttab=Q_NULLPTR;
+    int _tabheight=0;
+    int _height=0;
+
 signals:
     void CONTEXTTAB_STARTTAB(QString name);
     void CONTEXTTAB_ENDTAB(QString name);

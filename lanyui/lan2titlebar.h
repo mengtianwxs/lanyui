@@ -1,6 +1,6 @@
 #ifndef CUSTOMBAR_H
 #define CUSTOMBAR_H
-#include "lanyui/styles/lss2titlebar.h"
+#include "lss2titlebar.h"
 #include "lan2quickmenu.h"
 #include <QLabel>
 #include <QMouseEvent>
@@ -20,7 +20,7 @@ class Lan2TitleBar : public QFrame
 {
     Q_OBJECT
 public:
-    explicit Lan2TitleBar(QWidget *parent = nullptr);
+    explicit Lan2TitleBar(int height=30,QString color="#14af75",QWidget *parent = nullptr);
 private:
     bool t_isLeftPressed=false;
     QPoint start_pos;

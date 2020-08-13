@@ -4,7 +4,8 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QWidget>
-
+#include"lan2global.h"
+QTB_LANYUI
 class Lan2vmenu : public QFrame
 {
     Q_OBJECT
@@ -20,5 +21,5 @@ signals:
 
 public slots:
 };
-
+QTE_LANYUI
 #endif // LAN2VMENU_H

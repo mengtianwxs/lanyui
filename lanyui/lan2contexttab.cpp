@@ -2,20 +2,22 @@
 
 QTB_LANYUI
 
-Lan2ContextTab::Lan2ContextTab(QWidget *parent) : QWidget(parent)
+Lan2ContextTab::Lan2ContextTab(int height,int tabheight,QWidget *parent) : QWidget(parent)
 {
 
     setWindowFlags(Qt::FramelessWindowHint);
 
-    this->setFixedHeight(C_TabHeight+C_PageHeight);//设置总高度
+    this->setFixedHeight(height);//设置总高度
+    _tabheight=tabheight;
+    _height=height;
 
     wid_page=new QWidget(this);
     wid_tab=new QWidget(this);
     wid_page->setObjectName("wid_page");
     wid_tab->setObjectName("wid_tab");
 
-    wid_page->setFixedHeight(C_PageHeight);
-    wid_tab->setFixedHeight(C_TabHeight);
+    wid_page->setFixedHeight(height-tabheight);
+    wid_tab->setFixedHeight(tabheight);
 
     wid_tab->setStyleSheet(StyleSheet_WidTabBG);
     wid_page->setStyleSheet(StyleSheet_WidPageBG);
@@ -156,7 +158,7 @@ void Lan2ContextTab::hidePage()
       wid_page->setParent(Q_NULLPTR);
       mainVbox->removeWidget(wid_page);
     }
-      this->setFixedHeight(C_TabHeight);//重新设置整体高度为tab的高度
+      this->setFixedHeight(_tabheight);//重新设置整体高度为tab的高度
 
 }
 
@@ -188,7 +190,7 @@ void Lan2ContextTab::showPage()
         wid_page->setParent(this);//设置的顺序很重要不然会出现闪屏现象
         mainVbox->addWidget(wid_page);//设置的顺序很重要不然会出现闪屏现象
         wid_page->show();//设置的顺序很重要不然会出现闪屏现象
-        this->setFixedHeight(C_TabHeight+C_PageHeight);//重新设置整体高度为tab的高度+page的高度
+        this->setFixedHeight(_height);//重新设置整体高度为tab的高度+page的高度
 
         deleteAllPage();
 
@@ -201,34 +203,39 @@ void Lan2ContextTab::showPage()
 
 }
 
-void Lan2ContextTab::init(QString name)
+void Lan2ContextTab::inittab(QString tabobjectname)
 {
-    Lan2Tab* tb=getTabByObjectName(name);
+    Lan2Tab* tb=getTabByObjectName(tabobjectname);
     tb->setStyleSheet(StyleSheet_SelectTab);
     if(pageHBox->count()>0){
          deleteAllPage();
     }
 
-     pageHBox->addWidget(getPageByObjectName(name));
-     vec_selectPage.append(getPageByObjectName(name));//***
+     pageHBox->addWidget(getPageByObjectName(tabobjectname));
+     vec_selectPage.append(getPageByObjectName(tabobjectname));//***
 
      lanstate=State::SHOW;
 }
 
-void Lan2ContextTab::initStartTab(QString name)
+void Lan2ContextTab::initStartTab()
 {
-    Lan2StartTab* stb=getStartTabByObjectName(name);
-    stb->setStyleSheet(StyleSheet_DefaultStartTabBG);
+    if(lanstarttab!=Q_NULLPTR){
+        lanstarttab->setStyleSheet(StyleSheet_DefaultStartTabBG);
+    }
+
 }
 
-void Lan2ContextTab::addStartAndInitTab(Lan2StartTab* ltb,QString name)
+void Lan2ContextTab::addStartAndInitTab(Lan2StartTab* ltb)
 {
 
-    tabHBox->addWidget(ltb);
-    connect(ltb,SIGNAL(sig_starttab(QString)),this,SLOT(method_start_tab(QString)));
+    if(ltb!=Q_NULLPTR){
+        lanstarttab=ltb;
+        tabHBox->addWidget(ltb);
+        connect(ltb,SIGNAL(sig_starttab(QString)),this,SLOT(method_start_tab(QString)));
 
-    Lan2StartTab* stb=getStartTabByObjectName(name);
-    stb->setStyleSheet(StyleSheet_DefaultStartTabBG);
+        ltb->setStyleSheet(StyleSheet_DefaultStartTabBG);
+    }
+
 }
 
 void Lan2ContextTab::setEndTabState(Lan2ContextTab::State state)

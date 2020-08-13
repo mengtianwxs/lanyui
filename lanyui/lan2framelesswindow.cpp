@@ -1,4 +1,4 @@
-﻿#include "framelesswindow.h"
+﻿#include "lan2framelesswindow.h"
 #include "lan2vmenu.h"
 #include <QApplication>
 #include <QPoint>
@@ -15,7 +15,7 @@
 #pragma comment (lib,"Dwmapi.lib") // Adds missing library, fixes error LNK2019: unresolved external symbol __imp__DwmExtendFrameIntoClientArea
 #pragma comment (lib,"user32.lib")
 
-CFramelessWindow::CFramelessWindow(QWidget *parent)
+Lan2Framelesswindow::Lan2Framelesswindow(QWidget *parent)
     : QMainWindow(parent),
       m_titlebar(Q_NULLPTR),
       m_borderWidth(5),
@@ -32,7 +32,7 @@ CFramelessWindow::CFramelessWindow(QWidget *parent)
     setResizeable(m_bResizeable);
 }
 
-void CFramelessWindow::setResizeable(bool resizeable)
+void Lan2Framelesswindow::setResizeable(bool resizeable)
 {
     bool visible = isVisible();
     m_bResizeable = resizeable;
@@ -65,20 +65,20 @@ void CFramelessWindow::setResizeable(bool resizeable)
     setVisible(visible);
 }
 
-void CFramelessWindow::setResizeableAreaWidth(int width)
+void Lan2Framelesswindow::setResizeableAreaWidth(int width)
 {
     if (1 > width) width = 1;
     m_borderWidth = width;
 }
 
-void CFramelessWindow::setTitleBar(QWidget* titlebar)
+void Lan2Framelesswindow::setTitleBar(QWidget* titlebar)
 {
     m_titlebar = titlebar;
     if (!titlebar) return;
     connect(titlebar, SIGNAL(destroyed(QObject*)), this, SLOT(onTitleBarDestroyed()));
 }
 
-void CFramelessWindow::onTitleBarDestroyed()
+void Lan2Framelesswindow::onTitleBarDestroyed()
 {
     if (m_titlebar == QObject::sender())
     {
@@ -86,14 +86,14 @@ void CFramelessWindow::onTitleBarDestroyed()
     }
 }
 
-void CFramelessWindow::addIgnoreWidget(QWidget* widget)
+void Lan2Framelesswindow::addIgnoreWidget(QWidget* widget)
 {
     if (!widget) return;
     if (m_whiteList.contains(widget)) return;
     m_whiteList.append(widget);
 }
 
-bool CFramelessWindow::nativeEvent(const QByteArray &eventType, void *message, long *result)
+bool Lan2Framelesswindow::nativeEvent(const QByteArray &eventType, void *message, long *result)
 {
     //Workaround for known bug -> check Qt forum : https://forum.qt.io/topic/93141/qtablewidget-itemselectionchanged/13
     #if (QT_VERSION == QT_VERSION_CHECK(5, 11, 1))
@@ -257,12 +257,12 @@ bool CFramelessWindow::nativeEvent(const QByteArray &eventType, void *message, l
     }
 }
 
-void CFramelessWindow::setContentsMargins(const QMargins &margins)
+void Lan2Framelesswindow::setContentsMargins(const QMargins &margins)
 {
     QMainWindow::setContentsMargins(margins+m_frames);
     m_margins = margins;
 }
-void CFramelessWindow::setContentsMargins(int left, int top, int right, int bottom)
+void Lan2Framelesswindow::setContentsMargins(int left, int top, int right, int bottom)
 {
     QMainWindow::setContentsMargins(left+m_frames.left(),\
                                     top+m_frames.top(), \
@@ -273,13 +273,13 @@ void CFramelessWindow::setContentsMargins(int left, int top, int right, int bott
     m_margins.setRight(right);
     m_margins.setBottom(bottom);
 }
-QMargins CFramelessWindow::contentsMargins() const
+QMargins Lan2Framelesswindow::contentsMargins() const
 {
     QMargins margins = QMainWindow::contentsMargins();
     margins -= m_frames;
     return margins;
 }
-void CFramelessWindow::getContentsMargins(int *left, int *top, int *right, int *bottom) const
+void Lan2Framelesswindow::getContentsMargins(int *left, int *top, int *right, int *bottom) const
 {
     QMainWindow::getContentsMargins(left,top,right,bottom);
     if (!(left&&top&&right&&bottom)) return;
@@ -291,7 +291,7 @@ void CFramelessWindow::getContentsMargins(int *left, int *top, int *right, int *
         *bottom -= m_frames.bottom();
     }
 }
-QRect CFramelessWindow::contentsRect() const
+QRect Lan2Framelesswindow::contentsRect() const
 {
     QRect rect = QMainWindow::contentsRect();
     int width = rect.width();
@@ -302,7 +302,7 @@ QRect CFramelessWindow::contentsRect() const
     rect.setHeight(height);
     return rect;
 }
-void CFramelessWindow::showFullScreen()
+void Lan2Framelesswindow::showFullScreen()
 {
     if (isMaximized())
     {
@@ -311,5 +311,4 @@ void CFramelessWindow::showFullScreen()
     }
     QMainWindow::showFullScreen();
 }
-
 #endif //Q_OS_WIN

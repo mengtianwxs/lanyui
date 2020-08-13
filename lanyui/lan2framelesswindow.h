@@ -16,11 +16,11 @@
 #include<QDebug>
 #include<QMenu>
 
-class CFramelessWindow : public QMainWindow
+class Lan2Framelesswindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit CFramelessWindow(QWidget *parent = 0);
+    explicit Lan2Framelesswindow(QWidget *parent = 0);
 public:
 
     //设置是否可以通过鼠标调整窗口大小
@@ -67,7 +67,6 @@ private:
 
     bool m_bResizeable;
 };
-
 #endif
 
 #endif // CFRAMELESSWINDOW_H

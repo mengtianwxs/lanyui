@@ -2,7 +2,6 @@
 #define LANYU_TAB_H
 
 #include "lan2page.h"
-#include "lanyui/styles/lss2tab.h"
 #include <QAction>
 #include <QObject>
 #include <QPushButton>
@@ -12,12 +11,12 @@
 
 QTB_LANYUI
 
-class Lan2Tab : public QToolButton
+class Lan2Tab : public QToolButton//只允许显示文字信息
 {
     Q_OBJECT
 public:
 
-    Lan2Tab(QString objectname,QWidget* parent);
+    Lan2Tab(QString objectname="",QWidget* parent=Q_NULLPTR,int width=60,int height=35,QString bgcolor="#14af75");
     ~Lan2Tab();
 
 

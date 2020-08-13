@@ -1,15 +1,15 @@
 #include "lan2titlebar.h"
 
 QTB_LANYUI
-Lan2TitleBar::Lan2TitleBar(QWidget *parent)
+Lan2TitleBar::Lan2TitleBar(int height,QString color,QWidget *parent)
     : QFrame(parent)
 {
 
-    setStyleSheet(StyleSheet_WidCommonBG);
-    setFixedHeight(C_TitleBarHeight);
+    setStyleSheet("background:"+color);
+    setFixedHeight(height);
 
     lal_icon=new QLabel();
-    lal_icon->setFixedSize(C_TitleBarWidWidth,C_TitleBarWidHeight);
+    lal_icon->setFixedSize(C_TitleBarWidWidth,height);
 
 
     lal_title=new QLabel();

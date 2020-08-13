@@ -1,13 +1,13 @@
 #ifndef LAN2GROUPTOOL_H
 #define LAN2GROUPTOOL_H
-#include "lanyui/styles/lss2grouptool.h"
-#include "lanyui/styles/lss2vline.h"
+#include "lss2grouptool.h"
+#include "lss2vline.h"
 #include "lan2gridmenu.h"
 #include <QBoxLayout>
 #include <QObject>
 #include <QToolButton>
 #include <QMenu>
-#include<QAction>
+#include <QAction>
 #include <QFrame>
 #include <QLabel>
 #include "lan2global.h"
